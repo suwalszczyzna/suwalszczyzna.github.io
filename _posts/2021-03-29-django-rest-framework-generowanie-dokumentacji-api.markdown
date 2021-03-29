@@ -78,8 +78,8 @@ url += [path('docs/', include_docs_urls(title='Payer REST API'))]
 
 Pod ścieżką `docs/` kryje się tego typu strona, będąca pełnoprawną dokumentacją:
 
-![alt text](./images/drf-coreapi-docs.png "DRF - CoreAPI docs")
+![alt text]({{ BASE_PATH }}/assets/post_images/drf-coreapi-docs.png "DRF - CoreAPI docs")
 
 Z taką dokumentacją można nawet wejść w interakcję!
 
-![alt text](./images/drf-coreapi-docs-2.png "DRF - CoreAPI docs")
+![alt text]({{ BASE_PATH }}/assets/post_images/drf-coreapi-docs-2.png "DRF - CoreAPI docs")
