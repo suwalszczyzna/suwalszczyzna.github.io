@@ -12,7 +12,7 @@ Jest wiele narzędzi pomagających w zarządzaniu wersjami pythona i wirtualnymi
 Pyenv pozwala nam instalować, a później dowolnie wybierać która wersja Pythona ma być tą aktywną, dodatkowo uściślając scope wybranej wersji.
 
 ## Instalacja Pyenv + konfiguracja shella
-W związku z tym, że konfiguracja shella po instalacji pyenva wygląda różnie dla różnych powłok, to wolę tego nie opisywać odsyłając do dokumentacji, w której jest to dość jasno opisane: https://github.com/pyenv/pyenv
+W związku z tym, że konfiguracja shella po instalacji pyenva wygląda różnie dla różnych powłok, to wolę tego nie opisywać odsyłając do dokumentacji, w której jest to dość jasno opisane: [https://github.com/pyenv/pyenv](<https://github.com/pyenv/pyenv>)
 
 
 ## Wyświetlenie listy dostępnych wersji
