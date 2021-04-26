@@ -1,13 +1,15 @@
 ---
 layout: post
-title: "Dekorowanie w Pythonie: wzorzec dekorator i dekoratory"
+title: "Dekorowanie w Pythonie: wzorzec dekorator"
 date: 2021-04-26 18:00:00 +0100
 categories: python
 ---
 ### Zawartość
 - [Wzorzec dekorator](#wzorzec-dekorator)
+  - [Więcej niż jeden dekorator](#więcej-niż-jeden-dekorator)
 - [Dekorowanie funkcji](#dekorowanie-funkcji)
 - [Zastosowanie składni @dekorator](#zastosowanie-składni-dekorator)
+  - [Więcej niż jeden dekorator](#więcej-niż-jeden-dekorator-1)
 
 ## Wzorzec dekorator
 Wzorzec dekorator pozwala obudować funkcjonalność obiektu nadając jej nowe cechy, bez ingerencji w dotychczasowy sposób działania. 
@@ -91,6 +93,9 @@ Today, my son asked "Can I have a book mark?" and I burst into tears.
 
 Przekazujemy do funkcji używającej obiektu typu `Client` i jej metody `make_me_laugh` inny obiekt, udekorowany naszą implementacją w/w metody. 
 Czy nie prościej byłoby użyć dziedziczenia? 
+
+### Więcej niż jeden dekorator
+
 Dobrą praktyką, w momencie kiedy mamy wybór między użyciem wzorca dekoratora, a dziedziczeniem, jest użycie dekoratora. Dlaczego? 
 Użycie klasy dekorującej pozwala na dynamiczne podkładanie obiektu dekorowanego. Nic nie stoi na przeszkodzie aby udekorować sam dekorator. Jeśli poniższy przykład chcielibyśmy zrealizować za pomocą dziedziczenia to niezbędne byłoby stworzenie silnego wiązania między klasą `LogClient`, a nową klasą `FileSaverClient`, w postaci łańcucha dziedziczeń. Dodatkowo nie mielibyśmy możliwości, aby udekorować obiekt `Client` klasą `FileSaverClient` bez narzutu dekoratora `LogClient`.
 
@@ -227,4 +232,40 @@ Co w efekcie zwróci:
 Getting data...
 Data fetched in 1.0010933876037598 sec.
 I'M SO QUITE!!!!!!
+```
+
+### Więcej niż jeden dekorator
+
+Również w tym wypadku zastosowanie kilku dekoratorów do jeden funkcji jest możliwe. Jest to zdecydowanie czytelniejsze niż w przypadku klas:
+
+```python
+def logging(func):
+    def wrapper(*args, **kwargs):
+        print("Getting data...")
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"Data fetched in {end - start} sec.")
+        return result
+    return wrapper
+
+
+def dump_to_file(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        with open("data_dump.txt", "a") as file:
+            file.write(result + '\n')
+        return result
+    return wrapper
+
+
+@logging
+@dump_to_file
+def make_me_laugh():
+    with request.urlopen('https://v2.jokeapi.dev/joke/Any?type=single') as req:
+        json_data = json.loads(req.read().decode())
+    return json_data.get('joke')
+
+
+print(make_me_laugh())
 ```

@@ -2,7 +2,7 @@
 layout: post
 title: "Django Rest Framework - generowanie dokumentacji api"
 date: 2021-03-29 18:00:00 +0100
-categories: python
+categories: python django
 ---
 ### Zawartość
 - [OpenApi - endpoint 'schema'](#openapi---endpoint-schema)
