@@ -4,6 +4,15 @@ title: "Django Rest Framework - generowanie dokumentacji api"
 date: 2021-03-29 18:00:00 +0100
 categories: python
 ---
+### Zawartość
+- [OpenApi - endpoint 'schema'](#openapi---endpoint-schema)
+  - [Instalacja bibliotek](#instalacja-bibliotek)
+  - [Zmiana w pliku url.py](#zmiana-w-pliku-urlpy)
+- [CoreApi](#coreapi)
+  - [Instalacja bibliotek](#instalacja-bibliotek-1)
+  - [Zmiany w pliku settings.py](#zmiany-w-pliku-settingspy)
+  - [Zmiany w url.py](#zmiany-w-urlpy)
+
 Z pomocą Django Rest Framework i kilku pythonowych bibliotek bardzo łatwo wygenerować dokumentację do naszego API. 
 
 ## OpenApi - endpoint 'schema'

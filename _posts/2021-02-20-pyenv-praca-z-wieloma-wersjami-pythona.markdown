@@ -4,6 +4,14 @@ title: "Pyenv - praca z wieloma wersjami pythona "
 date: 2021-02-20 18:00:00 +0100
 categories: python
 ---
+### Zawartość
+- [Python 2.7, 3.0, a może 3.9? Tak.](#python-27-30-a-może-39-tak)
+- [Instalacja Pyenv + konfiguracja shella](#instalacja-pyenv--konfiguracja-shella)
+- [Wyświetlenie listy dostępnych wersji](#wyświetlenie-listy-dostępnych-wersji)
+- [Sprawdzenie zainstalowanych Pythonów w pyenv:](#sprawdzenie-zainstalowanych-pythonów-w-pyenv)
+- [Python w zależności od scope](#python-w-zależności-od-scope)
+- [Wirtualne środowiska](#wirtualne-środowiska)
+
 Mówi się, że nie powinno się ruszać domyślnie zainstalowanej wersji systemowej pythona. Jeżeli już mamy zainstalowanego jakiegoś pythona to wcale nie znaczy, że twórcy systemu chcięli oddać w nasze ręce narzędzie w postaci Pythona (najczęściej w starszej wersji niż obecna). Python bardzo często jest domyślnie zainstalowany ponieważ pewne części systemu opierają się na nim. Dlatego nie powinniśmy aktualizować wersji samego węża jak i zainstalowanych bibliotek. 
 
 ## Python 2.7, 3.0, a może 3.9? Tak.

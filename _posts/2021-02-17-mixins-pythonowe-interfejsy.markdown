@@ -4,6 +4,12 @@ title:  "Mixiny - pythonowy sposób na interfejsy"
 date:   2021-02-17 18:00:00 +0100
 categories: python clean_code
 ---
+### Zawartość
+- [Jak uzyskuje się kompozycję obiektów w Pythonie?](#jak-uzyskuje-się-kompozycję-obiektów-w-pythonie)
+- [Mixiny, całe na biało...](#mixiny-całe-na-biało)
+- [Mixiny i nadpisywanie metod](#mixiny-i-nadpisywanie-metod)
+
+
 Po przejściu do Pythona z innych języków programowania, które również są zorientowane na programowanie obiektowe, zdziwić może fakt, że ów Python nie posiada takiej konstrukcji jak interfejsy. Można zadać sobie pytanie: JAK TO?!
 
 ![](<https://media.giphy.com/media/fUqfaPVjiAQcfticZH/source.gif>)

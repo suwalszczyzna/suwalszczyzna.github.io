@@ -4,6 +4,13 @@ title: "Django Rest Framework - Uprawnienia"
 date: 2021-02-19 18:00:00 +0100
 categories: python django
 ---
+### Zawartość
+- [Implementacja uprawnień](#implementacja-uprawnień)
+    - [Dostęp do endpointa tylko dla AdminUser](#dostęp-do-endpointa-tylko-dla-adminuser)
+    - [Dostęp do entpointa zarządzany z poziomu Django](#dostęp-do-entpointa-zarządzany-z-poziomu-django)
+    - [Customowe uprawnienie: edycja tylko dla autora obiektu Post](#customowe-uprawnienie-edycja-tylko-dla-autora-obiektu-post)
+- [Testy jednostkowe](#testy-jednostkowe)
+
 
 Wraz z całym dobrodziejstwiem Django otrzymujemy możliwość zarządzania uprawnieniami użytkowników co do zarządzania modelem danych (dodaj, usuń, zmień itp), łączenia uprawnień w grupy czy dodania własnych uprawnień. Bez problemu można te uprawnienia wykorzystać w Django Rest Framework.
 
