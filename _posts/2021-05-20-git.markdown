@@ -1,0 +1,113 @@
+---
+layout: post
+title: "GIT - pigułka"
+date: 2021-05-20 18:00:00 +0100
+categories: python
+---
+
+1. Working tree - aktualne zmiany, jeszcze nie dodane do staging area
+2. Staging area - "poczekalnia", zmiany gotowe do zacommitowania
+3. Local repo - zacommitowane zmiany, historia commitów
+
+## Podstawowe komendy
+`git init` - inizjalizacja nowego repo
+
+`git status` - różnice pomiędzy przestrzeniami working tree, staging area i local repo
+
+## Commitowanie, przeglądanie zmian
+
+`git add <plik>` - dodanie zmian do z `working tree` do `staging area`
+
+`git add -A` - dodanie wszystkich zmian do `staging area` wraz z usunięciami plików
+
+`git commit -m "message"` - utworzenie commita (rewizji). Przeniesienie zmian ze `staging area` do `local repo`
+
+`git show <commit>` - info o commicie - kto wrzucił, kiedy, jakie zmiany, do którego brancha. Bez podania id_commit pokaże info o ostatnim commicie
+
+## Git Graph
+`git log` - lista commitów
+`git log --graph --oneline` - wyświetlenie grafu z podstawowymi informacji z aktualnej gałęzi
+`git log --graph --oneline --all` - graf commitów całego repo
+
+### utworzenie aliasu do GIT graph
+`git config --global alias.gr "git log --graph --oneline --all"` - utworzenie aliasu `git gr` dla wskazanej komendy.
+
+## Git diff
+`git diff` - różnice `working tree` -> `staging area`
+`git diff --staged` - różnice `staging area` -> `local repo`
+`git diff <commit>` - różnice `working tree` -> `konkretny commit`
+
+## Wycofywanie zmian
+`git reset NazwaPliku` - zastąpienie pliku z `local repo` do `staging area`
+
+Wycofanie zmian z working tree:
+`git checkout head NazwaPliku` - przywraca plik z `local repo` do `working tree oraz staging area`
+W powyższym poleceniu:
+    `head` - to konkretny commit, tutaj najświeży, na którego wskazuje head
+
+`git checkout -- NazwaPliku` - przywrócenie zmian, jeśli tego pliku nie ma jeszcze w `local repo`
+
+### Rozbicie zmian na dwa commity
+1. `git add --path NazwaPliku` 
+2. Decydujemy czy dodać wyświetlane zmiany do `staging area`. Jeśli zmiany są zbyt blisko siebie to wybieramy `e`.
+3. Otwiera się edytor plików. Decydujemy które zmiany mają wejść na stage
+4. Po zapisaniu zmiany w edytowanym pliku, wchodzą one OD RAU do `staging area`. Nie potrzeba wywoływać polecenia `git add`
+5. Commitujemy zmiany
+6. W `working tree` pozostają zmiany, które normalnie dodajemy poleceniem `git add NazwaPliku` + robimy commit
+
+## Praca z gałęziami
+
+`git checkout <commit>` - przesunięcie wskaźnika HEAD do wskazanego commita. Trzeba uważać, bo znajdujemy się wtedy w stanie `detached head`
+
+`git checkout <branch>` - przesunięcie HEAD do wskaźnika brancha.
+
+
+## Tworzenie gałęzi
+`git branch nazwa-brancha <opc. id_commita>` - tworzy nowego brancha. NIE PRZESUWA WSKAŹNIKA HEAD!
+
+`git checkout nazwa-brancha` - przesuwa wskaźnik HEAD na wskazany branch
+
+
+Najlepszy sposób na tworzenie brancha:
+`git checkout -b nazwa-brancha` - tworzy nowego brancha i przesuwa wskaźnik HEAD
+
+
+## Git clean - czyszczenie brancha
+`git clean -nd` - czyszczenie "na niby". Pokazuje, które pliki będą usunięte
+
+`git clean -fd` - czyszczenie "na serio". Usuwa pliki nieśledzone
+
+## Git merge
+`git merge nazwa-brancha` - merge into current. Git sam wybiera czy będzie to ff merge czy three-way merge.
+
+`git merge --no-ff nazwa-brancha` - merge bez możliwości fast-forward merge
+
+`git merge --abort` - przerwanie mergowania (np podczas wystąpienia konfliktów, których nie mamy czasu teraz rozwiązać)
+
+`git merge --continue` - kontynowanie merga po rozwiązaniu konfliktów
+
+## Informacje o gałęziach
+
+`git branch` - lista gałęzi
+`git branch --list feature/c*` - lista gałęzi zaczynających się na frazę `feature/c`
+`git branch --merged master` - lista gałęzi domergowanych do gałęzi master
+`git branch --no-merged master` - nie domergowane do gałęzi master
+
+Zmiana nazwy:
+`git branch -m stara-nazwa nowa-nazwa`
+
+`git branch -d` - usunięcie brancha. Jeśli nie jest domergowany do innego to git go nie usunie
+
+`git branch -D` - usunięcie brancha, nawet jeśli nie jest zmergowany z innym.
+
+
+## Git reset
+`git reset <commit>` - domyślnie z parametrem `--mixed`. Przesuwa wskaxnik brancha i head do wskazanego commita. 
+    parametr: `--hard` - przenosi zmiany z `local repo` do `staging area` oraz `working tree`
+    parametr: `--mixed` - przenosi zmiany z `locl repo` do `staging area`
+    parametr: `--soft` - nie przenosi żadnych zmian. W `working tree` oraz `staging` area zostają stare zmiany.
+
+`git reset --hard nazwa-brancha~2` - zresetowanie zmian o 2 commity do tyłu
+
+`git revert -n <commit>` - odwrócenie konkretnego commita. Tworzy nowy commit z odwróconymi zmianami.
+
