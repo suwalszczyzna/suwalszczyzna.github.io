@@ -52,7 +52,9 @@ categories: tools
 
 ## Git Graph
 `git log` - lista commitów
+
 `git log --graph --oneline` - wyświetlenie grafu z podstawowymi informacji z aktualnej gałęzi
+
 `git log --graph --oneline --all` - graf commitów całego repo
 
 ### utworzenie aliasu do GIT graph
@@ -60,7 +62,9 @@ categories: tools
 
 ## Git diff
 `git diff` - różnice `working tree` -> `staging area`
+
 `git diff --staged` - różnice `staging area` -> `local repo`
+
 `git diff <commit>` - różnice `working tree` -> `konkretny commit`
 
 ## Wycofywanie zmian
@@ -87,7 +91,8 @@ W powyższym poleceniu:
 ## Praca z gałęziami
 
 `git checkout <commit>` - przesunięcie wskaźnika HEAD do wskazanego commita. 
-> Trzeba uważać, bo znajdujemy się wtedy w stanie `detached head`
+
+> UWAGA: Po tej operacji znajdujemy się wtedy w stanie `detached head`. Czyli stanie, kiedy znacznik HEAD nie wskazuje na żaden branch.
 
 `git checkout <branch>` - przesunięcie HEAD do wskaźnika brancha.
 
@@ -106,8 +111,11 @@ W powyższym poleceniu:
 
 #### Listowanie gałęzi
 `git branch` - lista gałęzi
+
 `git branch --list feature/c*` - lista gałęzi zaczynających się na frazę `feature/c`
+
 `git branch --merged master` - lista gałęzi domergowanych do gałęzi master
+
 `git branch --no-merged master` - nie domergowane do gałęzi master
 
 #### Zmiana nazwy / usuwanie
@@ -135,9 +143,10 @@ Zmiana nazwy:
 `git merge --continue` - kontynowanie merga po rozwiązaniu konfliktów
 ### Git reset
 `git reset <commit>` - domyślnie z parametrem `--mixed`. Przesuwa wskaxnik brancha i head do wskazanego commita. 
-    parametr: `--hard` - przenosi zmiany z `local repo` do `staging area` oraz `working tree`
-    parametr: `--mixed` - przenosi zmiany z `locl repo` do `staging area`
-    parametr: `--soft` - nie przenosi żadnych zmian. W `working tree` oraz `staging` area zostają stare zmiany.
+
+- parametr: `--hard` - przenosi zmiany z `local repo` do `staging area` oraz `working tree`
+- parametr: `--mixed` - przenosi zmiany z `locl repo` do `staging area`
+- parametr: `--soft` - nie przenosi żadnych zmian. W `working tree` oraz `staging` area zostają stare zmiany.
 
 `git reset --hard nazwa-brancha~2` - zresetowanie zmian o 2 commity do tyłu
 
@@ -168,15 +177,16 @@ Zacommitowaliśmy zmiany w nie tym branchu co trzeba.
 
 ### Pobranie zmian ze zdalnego repo
 `git fetch origin` - ściągnięcie zdalnych gałęzi i commitów.
-_Uwaga: ten zabieg jeszcze nie pozwala pracować na świeżym repo. Trzeba wykonać `git merge` aby zmergować swoją lokalną gałąź ze zmianami pobranymi z origin. Zamiast `fetch` można użyć `pull`, który wykona tą operację za nas_
 
-`git pull origin master`
-Wykonają się następujące czynności:
+>Uwaga: ten zabieg jeszcze nie pozwala pracować na świeżym repo. Trzeba wykonać `git merge` aby zmergować swoją lokalną gałąź ze zmianami pobranymi z origin. Zamiast `fetch` można użyć `pull`, który wykona tą operację za nas
+
+`git pull origin master` - wykonają się następujące czynności:
+
 1. `git fetch origin master` - pobranie zdalnej gałęzi `master`
 2. `git merge` - fast-forward merge starej wersji lokalnej gałęzi master do nowych zmian
 
 ### Stworzenie lokalnej gałęzi na podstawie zdalnej
 `git checkout -b feature/zakupy origin/feature/zakupy` - git zakłada lokalną gałąź `feature/zakupy` na podstawie zdalnej oraz zapisuje tracking.
 
->*Najlepszy sposób:*
->`git checkout -t origin/master` - automatycznie tworzy lokalną gałąź o nazwie `master`
+*Najlepszy sposób:*
+*`git checkout -t origin/master` - automatycznie tworzy lokalną gałąź o nazwie `master`*
