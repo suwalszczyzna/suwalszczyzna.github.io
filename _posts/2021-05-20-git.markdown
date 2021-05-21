@@ -5,6 +5,32 @@ date: 2021-05-20 18:00:00 +0100
 categories: python
 ---
 
+- [Git stages:](#git-stages)
+- [Podstawowe komendy](#podstawowe-komendy)
+- [Commitowanie, przeglądanie zmian](#commitowanie-przeglądanie-zmian)
+- [Git Graph](#git-graph)
+  - [utworzenie aliasu do GIT graph](#utworzenie-aliasu-do-git-graph)
+- [Git diff](#git-diff)
+- [Wycofywanie zmian](#wycofywanie-zmian)
+  - [Rozbicie zmian na dwa commity](#rozbicie-zmian-na-dwa-commity)
+  - [Poprawka ostatniego commita](#poprawka-ostatniego-commita)
+- [Praca z gałęziami](#praca-z-gałęziami)
+  - [Tworzenie gałęzi](#tworzenie-gałęzi)
+  - [Informacje o gałęziach](#informacje-o-gałęziach)
+    - [Listowanie gałęzi](#listowanie-gałęzi)
+    - [Zmiana nazwy / usuwanie](#zmiana-nazwy--usuwanie)
+- [Czyszczenie, scalanie, resetowanie, cherry-picking](#czyszczenie-scalanie-resetowanie-cherry-picking)
+  - [Czyszczenie zmian - Git clean](#czyszczenie-zmian---git-clean)
+  - [Scalanie zmian - Git merge](#scalanie-zmian---git-merge)
+  - [Git reset](#git-reset)
+  - [Git rebase](#git-rebase)
+  - [Cherry-pick](#cherry-pick)
+- [Praca ze zdalnym repo](#praca-ze-zdalnym-repo)
+  - [Wypchnięcie zmian do zdalnego repo](#wypchnięcie-zmian-do-zdalnego-repo)
+  - [Pobranie zmian ze zdalnego repo](#pobranie-zmian-ze-zdalnego-repo)
+  - [Stworzenie lokalnej gałęzi na podstawie zdalnej](#stworzenie-lokalnej-gałęzi-na-podstawie-zdalnej)
+
+## Git stages:
 1. Working tree - aktualne zmiany, jeszcze nie dodane do staging area
 2. Staging area - "poczekalnia", zmiany gotowe do zacommitowania
 3. Local repo - zacommitowane zmiany, historia commitów
@@ -152,5 +178,5 @@ Wykonają się następujące czynności:
 ### Stworzenie lokalnej gałęzi na podstawie zdalnej
 `git checkout -b feature/zakupy origin/feature/zakupy` - git zakłada lokalną gałąź `feature/zakupy` na podstawie zdalnej oraz zapisuje tracking.
 
-*Najlepszy sposób:*
-`git checkout -t origin/master` - automatycznie tworzy lokalną gałąź o nazwie `master`
+>*Najlepszy sposób:*
+>`git checkout -t origin/master` - automatycznie tworzy lokalną gałąź o nazwie `master`
