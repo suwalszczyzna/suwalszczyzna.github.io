@@ -55,44 +55,36 @@ W powyższym poleceniu:
 5. Commitujemy zmiany
 6. W `working tree` pozostają zmiany, które normalnie dodajemy poleceniem `git add NazwaPliku` + robimy commit
 
+### Poprawka ostatniego commita 
+`git commit --amend` - dopisuje zmiany ze staging area do ostatniego commita. W historii nie widać nowego commita.
+
 ## Praca z gałęziami
 
-`git checkout <commit>` - przesunięcie wskaźnika HEAD do wskazanego commita. Trzeba uważać, bo znajdujemy się wtedy w stanie `detached head`
+`git checkout <commit>` - przesunięcie wskaźnika HEAD do wskazanego commita. 
+> Trzeba uważać, bo znajdujemy się wtedy w stanie `detached head`
 
 `git checkout <branch>` - przesunięcie HEAD do wskaźnika brancha.
 
 
-## Tworzenie gałęzi
+### Tworzenie gałęzi
 `git branch nazwa-brancha <opc. id_commita>` - tworzy nowego brancha. NIE PRZESUWA WSKAŹNIKA HEAD!
 
 `git checkout nazwa-brancha` - przesuwa wskaźnik HEAD na wskazany branch
 
 
-Najlepszy sposób na tworzenie brancha:
-`git checkout -b nazwa-brancha` - tworzy nowego brancha i przesuwa wskaźnik HEAD
+> Najlepszy sposób na tworzenie brancha:
+> `git checkout -b nazwa-brancha` - tworzy nowego brancha i przesuwa wskaźnik HEAD
 
 
-## Git clean - czyszczenie brancha
-`git clean -nd` - czyszczenie "na niby". Pokazuje, które pliki będą usunięte
+### Informacje o gałęziach
 
-`git clean -fd` - czyszczenie "na serio". Usuwa pliki nieśledzone
-
-## Git merge
-`git merge nazwa-brancha` - merge into current. Git sam wybiera czy będzie to ff merge czy three-way merge.
-
-`git merge --no-ff nazwa-brancha` - merge bez możliwości fast-forward merge
-
-`git merge --abort` - przerwanie mergowania (np podczas wystąpienia konfliktów, których nie mamy czasu teraz rozwiązać)
-
-`git merge --continue` - kontynowanie merga po rozwiązaniu konfliktów
-
-## Informacje o gałęziach
-
+#### Listowanie gałęzi
 `git branch` - lista gałęzi
 `git branch --list feature/c*` - lista gałęzi zaczynających się na frazę `feature/c`
 `git branch --merged master` - lista gałęzi domergowanych do gałęzi master
 `git branch --no-merged master` - nie domergowane do gałęzi master
 
+#### Zmiana nazwy / usuwanie
 Zmiana nazwy:
 `git branch -m stara-nazwa nowa-nazwa`
 
@@ -100,8 +92,22 @@ Zmiana nazwy:
 
 `git branch -D` - usunięcie brancha, nawet jeśli nie jest zmergowany z innym.
 
+## Czyszczenie, scalanie, resetowanie, cherry-picking
 
-## Git reset
+### Czyszczenie zmian - Git clean
+`git clean -nd` - czyszczenie "na niby". Pokazuje, które pliki będą usunięte
+
+`git clean -fd` - czyszczenie "na serio". Usuwa pliki nieśledzone
+
+### Scalanie zmian - Git merge
+`git merge nazwa-brancha` - merge into current. Git sam wybiera czy będzie to ff merge czy three-way merge.
+
+`git merge --no-ff nazwa-brancha` - merge bez możliwości fast-forward merge
+
+`git merge --abort` - przerwanie mergowania (np podczas wystąpienia konfliktów, których nie mamy czasu teraz rozwiązać)
+
+`git merge --continue` - kontynowanie merga po rozwiązaniu konfliktów
+### Git reset
 `git reset <commit>` - domyślnie z parametrem `--mixed`. Przesuwa wskaxnik brancha i head do wskazanego commita. 
     parametr: `--hard` - przenosi zmiany z `local repo` do `staging area` oraz `working tree`
     parametr: `--mixed` - przenosi zmiany z `locl repo` do `staging area`
@@ -111,3 +117,40 @@ Zmiana nazwy:
 
 `git revert -n <commit>` - odwrócenie konkretnego commita. Tworzy nowy commit z odwróconymi zmianami.
 
+
+### Git rebase
+Polecenie `git rebase master` modyfikuje historię. Przesuwa początek naszego brancha do ostatniej zmiany wykonanej na branchu `master`, z którego powstał. Dzięki temu, jeśli pracujemy na naszej gałęzi długo, a inni domergują zmiany do mastera to możemy te zmiany mieć u siebie - bez potrzeby tworzenia nowej gałęzi.
+
+![Git rebase]({{ BASE_PATH }}/assets/post_images/git_rebase.png "Git rebase")
+
+### Cherry-pick
+`git cherry-pick <commit>` - bierze zmiany ze wskazanego commita i wrzuca do working tree naszego brancha.
+
+![Git cherry-pick]({{ BASE_PATH }}/assets/post_images/cherry_pick.png "Git cherry-pick")
+
+Przykładowy scenariusz użycia:
+Zacommitowaliśmy zmiany w nie tym branchu co trzeba. 
+- Przełączamy się na nową gałąź
+- Robimy cherry-pick na commicie z poprzedniej gałęzi
+- Pracujemy na nowej gałęzi lub robimy commit
+- Wracamy do poprzedniej gałęzi i robimy git reset o jeden commit do tyłu, aby pozbyć się duplikatu kodu.
+
+## Praca ze zdalnym repo
+
+### Wypchnięcie zmian do zdalnego repo
+`git push origin nazwa-lokalnego-brancha` - wypycha do zdalnego repozytorium `origin` lokalny branch.
+
+### Pobranie zmian ze zdalnego repo
+`git fetch origin` - ściągnięcie zdalnych gałęzi i commitów.
+_Uwaga: ten zabieg jeszcze nie pozwala pracować na świeżym repo. Trzeba wykonać `git merge` aby zmergować swoją lokalną gałąź ze zmianami pobranymi z origin. Zamiast `fetch` można użyć `pull`, który wykona tą operację za nas_
+
+`git pull origin master`
+Wykonają się następujące czynności:
+1. `git fetch origin master` - pobranie zdalnej gałęzi `master`
+2. `git merge` - fast-forward merge starej wersji lokalnej gałęzi master do nowych zmian
+
+### Stworzenie lokalnej gałęzi na podstawie zdalnej
+`git checkout -b feature/zakupy origin/feature/zakupy` - git zakłada lokalną gałąź `feature/zakupy` na podstawie zdalnej oraz zapisuje tracking.
+
+*Najlepszy sposób:*
+`git checkout -t origin/master` - automatycznie tworzy lokalną gałąź o nazwie `master`
