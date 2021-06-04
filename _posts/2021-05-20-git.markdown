@@ -58,7 +58,7 @@ categories: tools
 `git log --graph --oneline --all` - graf commitów całego repo
 
 ### utworzenie aliasu do GIT graph
-`git config --global alias.gr "git log --graph --oneline --all"` - utworzenie aliasu `git gr` dla wskazanej komendy.
+`git config --global alias.gr "log --graph --oneline --all"` - utworzenie aliasu `git gr` dla wskazanej komendy.
 
 ## Git diff
 `git diff` - różnice `working tree` -> `staging area`
@@ -103,8 +103,8 @@ W powyższym poleceniu:
 `git checkout nazwa-brancha` - przesuwa wskaźnik HEAD na wskazany branch
 
 
-> Najlepszy sposób na tworzenie brancha:
-> `git checkout -b nazwa-brancha` - tworzy nowego brancha i przesuwa wskaźnik HEAD
+*Najlepszy sposób na tworzenie brancha:*
+*`git checkout -b nazwa-brancha` - tworzy nowego brancha i przesuwa wskaźnik HEAD*
 
 
 ### Informacje o gałęziach
@@ -159,7 +159,7 @@ Polecenie `git rebase master` modyfikuje historię. Przesuwa początek naszego b
 ![Git rebase]({{ BASE_PATH }}/assets/post_images/git_rebase.png "Git rebase")
 
 ### Cherry-pick
-`git cherry-pick <commit>` - bierze zmiany ze wskazanego commita i wrzuca do working tree naszego brancha.
+`git cherry-pick -n <commit>` - bierze zmiany ze wskazanego commita i wrzuca do working tree naszego brancha. Flaga `-n` oznacza `no-commit`. Zamiany nie zostaną zacommitowane w nowym branchu. Bez tej flagi przeniesie się cały commit.
 
 ![Git cherry-pick]({{ BASE_PATH }}/assets/post_images/cherry_pick.png "Git cherry-pick")
 
