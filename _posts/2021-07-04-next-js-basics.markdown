@@ -49,7 +49,7 @@ export default function AdminPostEditPage({}){
 Example file: `page/index.js`
 
 ```javascript
-{% raw %}{{
+{% raw %}
 import Link from 'next/link';
 
 export default function Home() {
@@ -65,7 +65,6 @@ export default function Home() {
       </>
   )
 }
-}}
 {% endraw %}
 ```
 
