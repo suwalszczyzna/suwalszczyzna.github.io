@@ -48,7 +48,8 @@ export default function AdminPostEditPage({}){
 ## Links
 Example file: `page/index.js`
 
-```
+```javascript
+{% raw %}{{
 import Link from 'next/link';
 
 export default function Home() {
@@ -64,6 +65,8 @@ export default function Home() {
       </>
   )
 }
+}}
+{% endraw %}
 ```
 
 ![Next.js link]({{ BASE_PATH }}/assets/post_images/next_routing.png "Next.js link")
