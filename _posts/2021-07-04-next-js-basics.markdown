@@ -48,7 +48,7 @@ export default function AdminPostEditPage({}){
 ## Links
 Example file: `page/index.js`
 
-```javascript
+```
 import Link from 'next/link';
 
 export default function Home() {
