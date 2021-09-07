@@ -12,22 +12,23 @@ This blog post is about rem and em. The most responsive units in css, virtually 
 
 - [REM and EM - what's the difference?](#rem-and-em---whats-the-difference)
 - [Dealing with media queries](#dealing-with-media-queries)
+      - [Create css variables.](#create-css-variables)
+      - [Change html font-size](#change-html-font-size)
 - [VW unit and clamp() combo](#vw-unit-and-clamp-combo)
-  - [What is clamp function?](#what-is-clamp-function)
-- [Codepen](#codepen)
+- [What is clamp function?](#what-is-clamp-function)
+- [Codepen example](#codepen-example)
 
 
 # REM and EM - what's the difference?
 
-Difference is quite simple:
+Difference is simple:
 
--- `rem` is relative to font-size of the *ROOT* element on page. Literally, it is 'html' tag.
+-- **rem** is relative to font-size of the **ROOT** element on page. Literally, it is 'html' tag.
 
 For example:
 
 You set `font-size` on your html element to `15px`. Now when you will use `rem` it will depend on this 15px.
 * 1 rem = 15px
-
 * 2 rem = 30px etc.
 
 
@@ -46,7 +47,7 @@ h1 {
 }
 ```
 
--- `em` is relative to font-size of a parent element. I think it is clear.
+-- **em** is relative to font-size of a **parent** element. I think it is clear
 
 ```css
 .card {
@@ -69,7 +70,7 @@ Responsive units won't help if we abuse media queries. It's really easy to make 
 
 There is couple option:
 
-1. Create css variables.
+#### Create css variables.
 
 ```css
 :root {
@@ -88,7 +89,7 @@ There is couple option:
 As you see above in `min-width` we used rem too. 60rem in this case mean 960px. I haven't assigned any value of font-size in html element so its default value is 16px. `60 * 16px = 960px`. Voila! :) 
 
 
-2. Change html font-size
+#### Change html font-size
 
 This way can generate some problems because it will change all your responsive sizes in all projects. You have to use it intentionally.
 
@@ -108,7 +109,7 @@ p {
 ```
 
 
-*Be careful - if you use relative units in media query definition and change html font-size don't set font-size in html element by yourself (outside media query)
+> Be careful - if you use relative units in media query definition and change html font-size don't set font-size in html element by yourself (outside media query)
 
 # VW unit and clamp() combo
 VW - viewport width unit is kinda tricky. If you use it normally, e.g:
@@ -121,7 +122,7 @@ it brings you many problems. On huge monitors, your font will be enormous big bu
 
 But if we aid to this operation `clamp` function we'll be able to apply limitations of growing and shrink.
 
-## What is clamp function? 
+# What is clamp function? 
 
 It's simple. Clamp function accepts minimal, actual and maximum value: `clamp(MIN, VAL, MAX)`
 
@@ -131,7 +132,7 @@ Examples:
 * `clamp(1.5rem, 2.5vw, 4rem);`
 * `clamp(3.5rem, 10vw + 1rem, 8rem);`
 
-# Codepen
+# Codepen example
 I have prepared codepen to play with all of today seen tricks
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="abwpowm" data-preview="true" data-user="damiansuwala" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
