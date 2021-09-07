@@ -10,6 +10,13 @@ Responsive web design is the most important thing in web development nowadays. T
 This blog post is about rem and em. The most responsive units in css, virtually they was created especially for responsive designs.
 
 
+- [REM and EM - what's the difference?](#rem-and-em---whats-the-difference)
+- [Dealing with media queries](#dealing-with-media-queries)
+- [VW unit and clamp() combo](#vw-unit-and-clamp-combo)
+  - [What is clamp function?](#what-is-clamp-function)
+- [Codepen](#codepen)
+
+
 # REM and EM - what's the difference?
 
 Difference is quite simple:
@@ -127,7 +134,7 @@ Examples:
 # Codepen
 I have prepared codepen to play with all of today seen tricks
 
-<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="abwpowm" data-preview="true" data-user="damiansuwala" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="css,result" data-slug-hash="abwpowm" data-preview="true" data-user="damiansuwala" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
   <span>See the Pen <a href="https://codepen.io/damiansuwala/pen/abwpowm">
   Responsive typography</a> by damiansuwala (<a href="https://codepen.io/damiansuwala">@damiansuwala</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
