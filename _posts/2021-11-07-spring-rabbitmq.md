@@ -30,6 +30,7 @@ Przy tworzeniu projektów publishera i consumera użyłem Spring Initializr i mo
 - Spring for Rabbit
 ## Publisher
 ```java
+
 // file Publisher.java
 import ...
 
@@ -54,6 +55,7 @@ public class Publisher {
         return "sent";
     }
 }
+
 ```
 
 1. Tworzę klasę o nazwie "Publisher" i oznaczam ją jako Springowy component, tutaj wskazuje, że użyję go do RestApi (stąd anotacja `@RestConttroller`, ale zwykły `@Component` też zadziała)
@@ -64,7 +66,8 @@ public class Publisher {
    - Na końcu zwracam stringa "sent" dla potwierdzenia wysłania wiadomości.
 
 Kiedy wyślę zapytanie typu GET do mojego Springowego serwera (w tym wypadku działającego na porcie 8080) to kolejka `events` dostanie pierwszą wiadomość. 
-```
+
+```bash
 GET localhost:8080/sendMessage?message=tutaj_tresc_wiadomosci
 ```
 
@@ -72,6 +75,7 @@ GET localhost:8080/sendMessage?message=tutaj_tresc_wiadomosci
 Teraz przyszła kolej na stworzenie aplikacji, która będzie miała za zadanie odbierać wiadomości z kolejki `events`
 
 ```java
+
 // file Consumer.java
 
 import ...
@@ -108,14 +112,16 @@ Kiedy kolejka będzie pusta, a my nadal będziemy wywoływać metodę `getMessag
 Na razie to tak zostawmy i nie obsługujmy tego błędu, za chwilę zajmiemy się innym sposobem na pobieranie wiadomości.
 
 W tym wypadku w naszym Springu, w `application.properties` wskazałem inny port servera. Chcę aby publisher i consumer pracowali jednocześnie, ale jak wiadomo nie mogę odpalić dwóch aplikacji na tym samym porcie.
+
 ```java
+
 // file application.properties
 server.port=8081
 ```
 
 Po wysłaniu zapytania typu GET na adres localhost:8081/receiveMessage otrzymam jedną wiadomość z kolejki
 
-```
+```bash
 GET localhost:8081/receiveMessage
 ```
 ### RabbitListener
@@ -124,10 +130,12 @@ Jak wcześniej wspominałem, podejdziemy do pobierania wiadomości z kolejek te�
 Dodaję do klasy `Consumer` metodę `rabbitListener` z odpowiednią adnotacją:
 
 ```java
+
 @RabbitListener(queues = "events")
 public void rabbitListener(String s){
     System.out.println(s);
 }
+
 ```
 - W parametrze anotacji podaję nazwę kolejki
 - A w tym wypadku po otrzymaniu każdej wiadomości zostanie ona wyprintowana na ekran
