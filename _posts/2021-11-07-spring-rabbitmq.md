@@ -76,28 +76,28 @@ Teraz przyszła kolej na stworzenie aplikacji, która będzie miała za zadanie 
 
 ```java
 
-// file Consumer.java
+    // file Consumer.java
 
-import ...
+    import ...
 
-// (1)
-@RestController
-public class Consumer{
-// (2) start
-    private final RabbitTemplate rabbitTemplate;
+    // (1)
+    @RestController
+    public class Consumer{
+    // (2) start
+        private final RabbitTemplate rabbitTemplate;
 
-    @Autowired
-    public Consumer(RabbitTemplate rabbitTemplate) {
-        this.rabbitTemplate = rabbitTemplate;
+        @Autowired
+        public Consumer(RabbitTemplate rabbitTemplate) {
+            this.rabbitTemplate = rabbitTemplate;
+        }
+    // (2) end
+    // (3)
+        @GetMapping("/receiveMessage")
+        public String getMessage(){
+            Object message = rabbitTemplate.receiveAndConvert("events");
+            return message.toString();
+        }
     }
-// (2) end
-// (3)
-    @GetMapping("/receiveMessage")
-    public String getMessage(){
-        Object message = rabbitTemplate.receiveAndConvert("events");
-        return message.toString();
-    }
-}
 ```
 
 1. Podobnie jak w przypadku Publishera tworzę klasę z anotacją `@RestController`
